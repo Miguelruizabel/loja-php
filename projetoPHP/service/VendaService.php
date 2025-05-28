@@ -18,7 +18,7 @@ class VendaService
         $stmt = $this->pdo->query("SELECT * FROM vendas ORDER BY data_venda DESC");
         $vendas = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            // Calcula o total somando os itens
+            
             $total = $this->calcularTotalVenda($row['id']);
             $vendas[] = (object)[
                 'id' => $row['id'],
@@ -85,7 +85,7 @@ class VendaService
         return $venda_id;
     }
 
-    // Adicionado: Limpar histórico de vendas
+    
     public function limparHistoricoVendas()
     {
         $this->pdo->beginTransaction();
@@ -94,7 +94,7 @@ class VendaService
         $this->pdo->commit();
     }
 
-    // Novo método: Salvar histórico de vendas em CSV
+    
     public function salvarHistoricoVendasCSV($filePath)
     {
         $vendas = $this->listarVendas();
