@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../service/VendaService.php';
 
 $vendaService = new VendaService();
 
-// Exportar histórico de vendas em CSV, se solicitado
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['exportar_historico'])) {
     $vendas = $vendaService->listarVendas();
     header('Content-Type: text/csv; charset=utf-8');
@@ -19,17 +19,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['exportar_historico'])
     exit;
 }
 
-// Limpar histórico de vendas, se solicitado
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['limpar_historico'])) {
     $vendaService->limparHistoricoVendas();
     header('Location: index.php');
     exit;
 }
 
-// Buscar vendas
+
 $vendas = $vendaService->listarVendas();
 
-// Buscar itens de uma venda específica, se solicitado
+
 $itens = [];
 if (isset($_GET['visualizar'])) {
     $itens = $vendaService->listarItensVenda($_GET['visualizar']);
@@ -53,7 +53,7 @@ if (isset($_GET['visualizar'])) {
         .itens { margin-top: 30px; }
         .limpar-btn { margin-bottom: 20px; }
         .exportar-btn { margin-bottom: 20px; }
-        /* Botões customizados */
+        
         .btn-custom {
             background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
             color: #fff;
