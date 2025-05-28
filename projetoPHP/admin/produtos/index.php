@@ -7,14 +7,14 @@ require_once __DIR__ . '/../../service/CategoriaService.php';
 $produtoService = new ProdutoService();
 $categoriaService = new CategoriaService();
 
-// Excluir produto
+
 if (isset($_GET['excluir'])) {
     $produtoService->excluirProduto($_GET['excluir']);
     header("Location: index.php");
     exit;
 }
 
-// Salvar novo produto ou editar existente
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = $_POST['nome'];
     $preco = $_POST['preco'];
@@ -22,23 +22,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'] ?? null;
 
     if ($id) {
-        // Editar produto
+        
         $produtoService->editarProduto($id, $nome, $preco, $categoria_id);
     } else {
-        // Novo produto
+        
         $produtoService->salvarProduto($nome, $preco, $categoria_id);
     }
     header("Location: index.php");
     exit;
 }
 
-// Buscar produto para edição
+
 $produtoEdit = null;
 if (isset($_GET['editar'])) {
     $produtoEdit = $produtoService->buscarProdutoPorId($_GET['editar']);
 }
 
-// Listar produtos e categorias
+
 $produtos = $produtoService->listarProdutos();
 $categorias = [];
 foreach ($categoriaService->listarCategorias() as $cat) {
@@ -135,7 +135,7 @@ foreach ($categoriaService->listarCategorias() as $cat) {
 <body>
 <h1>Gerenciamento de Produtos</h1>
 
-<!-- Formulário de novo/edição -->
+
 <form method="post">
     <input type="hidden" name="id" value="<?= $produtoEdit ? $produtoEdit->getId() : '' ?>">
     <label>Nome:</label>
@@ -157,7 +157,7 @@ foreach ($categoriaService->listarCategorias() as $cat) {
     <?php endif; ?>
 </form>
 
-<!-- Tabela de produtos -->
+
 <table>
     <tr>
         <th>ID</th>
