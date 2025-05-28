@@ -11,7 +11,7 @@
 
 1. **Clone o repositório**
 2. **Importe o banco de dados**  
- Use a pasta "scripts" que contem os arquivos para criar as tabelas no phpMyAdmin 
+ Use a pasta "scripts" nela contem os arquivos para criar as tabelas no phpMyAdmin 
 3. **Configure o banco de dados**  
    Edite `database/dbconnect.php` com as credenciais do seu banco.
 4. **Inicie o servidor local**  
