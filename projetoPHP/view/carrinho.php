@@ -12,7 +12,7 @@ $finalizado = false;
 $erro = '';
 $etapa = $_POST['etapa'] ?? 'selecionar_pagamento';
 
-// Remover produto do carrinho
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['remover_id'])) {
         $remover_id = $_POST['remover_id'];
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     if (isset($_POST['finalizar'])) {
-        // Salvar venda no banco
+        
         $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
         $total = 0;
         foreach ($carrinho as $produto_id => $quantidade) {
@@ -32,13 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $total += $produto->getPreco() * $quantidade;
             }
         }
-        // Verifica se o endereço foi enviado
+        
         $endereco_entrega = $_POST['endereco_entrega'] ?? '';
         if (empty($endereco_entrega)) {
             $finalizado = false;
             $erro = "O endereço de entrega é obrigatório.";
         } elseif ($total > 0) {
-            // Aqui você pode passar o endereço para registrarVenda se desejar salvar no banco
+            
             $vendaService->registrarVenda($carrinho /*, $endereco_entrega */);
             $_SESSION['carrinho'] = [];
             $finalizado = true;
@@ -271,7 +271,7 @@ $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
                 <form method="post" class="pagamento-dados" autocomplete="off">
                     <input type="hidden" name="pagamento" value="<?= htmlspecialchars($pagamento) ?>">
                     <input type="hidden" name="etapa" value="finalizar">
-                    <!-- Campo de endereço obrigatório para todos os pagamentos -->
+                    
                     <label>Endereço de entrega:</label>
                     <input type="text" name="endereco_entrega" maxlength="120" required placeholder="Rua, número, bairro, cidade, UF">
                     <?php if ($pagamento == 'pix'): ?>
