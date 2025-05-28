@@ -17,18 +17,4 @@ class CategoriaController
         return $this->service->listarCategorias();
     }
 
-    public function salvar($nome)
-    {
-        return $this->service->salvarCategoria($nome);
-    }
-
-    public function excluir($id)
-    {
-        return $this->service->excluirCategoria($id);
-    }
-
-    public function buscarPorId($id)
-    {
-        return $this->service->buscarCategoriaPorId($id);
-    }
 }
