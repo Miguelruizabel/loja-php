@@ -5,7 +5,7 @@ session_start();
 require_once '../service/ProdutoService.php';
 $produtoService = new ProdutoService();
 
-// Mapeamento de nomes de produtos para imagens
+
 $imagens_produtos = [
     'PlayStation 5' => '../assets/Playstation 5.jpg.jpg',
     'Xbox Series X' => '../assets/Xbox Series X.jpg.webp',
@@ -14,13 +14,13 @@ $imagens_produtos = [
     'Cadeira gamer' => '../assets/Cadeira Gamer.jpg.webp',
     'Headset Gamer' => '../assets/Headset Gamer.jpg.webp',
     'Mouse Gamer' => '../assets/Mouse Gamer.jpg.webp',
-    'PlayStation 4' => '../assets/Playstation 4.jpg.webp', // AJUSTADO para o nome correto do arquivo
+    'PlayStation 4' => '../assets/Playstation 4.jpg.webp', 
     'Xbox Series S' => '../assets/Xbox Series S.jpg.webp',
     'Pc Gamer Completo' => '../assets/Gabinete Gamer Completo.jpg.webp',
 ];
 
 
-// Adiciona produto ao carrinho
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['produto_id'])) {
     $produto_id = $_POST['produto_id'];
     $quantidade = max(1, intval($_POST['quantidade']));
