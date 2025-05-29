@@ -1,10 +1,7 @@
 <?php
-
 session_start();
-
 require_once '../service/ProdutoService.php';
 $produtoService = new ProdutoService();
-
 
 $imagens_produtos = [
     'PlayStation 5' => '../assets/Playstation 5.jpg.jpg',
@@ -19,12 +16,9 @@ $imagens_produtos = [
     'Pc Gamer Completo' => '../assets/Gabinete Gamer Completo.jpg.webp',
 ];
 
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['produto_id'])) {
     $produto_id = $_POST['produto_id'];
     $quantidade = max(1, intval($_POST['quantidade']));
-
     if (!isset($_SESSION['carrinho'])) {
         $_SESSION['carrinho'] = [];
     }
@@ -276,9 +270,11 @@ if ($busca !== '') {
                     <div class="produto">
                         <?php
                             $nome = $produto->getNome();
-                            $img = isset($imagens_produtos[$nome]) ? $imagens_produtos[$nome] : '../assets/imagem.png';
+                            $img = isset($imagens_produtos[$nome]) ? $imagens_produtos[$nome] : null;
                         ?>
-                        <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($nome) ?>" class="produto-imagem">
+                        <?php if ($img): ?>
+                            <img src="<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($nome) ?>" class="produto-imagem">
+                        <?php endif; ?>
                         <h3><?= htmlspecialchars($nome) ?></h3>
                         <div class="preco">R$ <?= number_format($produto->getPreco(), 2, ',', '.') ?></div>
                         <form action="index.php" method="post">
